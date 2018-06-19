@@ -1,0 +1,42 @@
+{
+  "name": "pro",
+  "version": "1.0.0",
+  "description": "project-cli",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp dev",
+    "dev": "gulp dev",
+    "clean": "rimraf dist",
+    "build": "rimraf dist && gulp build"
+  },
+  "keywords": [
+    "mdhl-cli"
+  ],
+  "author": "hank",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "gulp-watch-path": "^0.1.0",
+    "stream-combiner2": "^1.1.1"
+  },
+  "dependencies": {
+    "browser-sync": "^2.18.6",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-file-include": "^2.0.1",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.0.0",
+    "gulp-uglify": "^2.0.0",
+    "jshint": "^2.9.4",
+    "rimraf": "^2.6.2"
+  }
+}
