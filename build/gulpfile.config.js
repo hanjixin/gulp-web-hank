@@ -15,11 +15,15 @@ var Config = {
         dist: DIST_DIR + 'assets'                // assets文件build后存放的目录：./dist/assets  
     },  
     css: {  
-        src: SRC_DIR + 'css/**/*.css',           // CSS目录：./src/css/  
+        src: SRC_DIR + 'styles/**/*.css',           // CSS目录：./src/css/  
         dist: DIST_DIR + 'css'                   // CSS文件build后存放的目录：./dist/css  
     },  
     sass: {  
-        src: SRC_DIR + 'sass/**/*.scss',         // SASS目录：./src/sass/  
+        src: SRC_DIR + 'styles/**/*.scss',         // SASS目录：./src/styles/  
+        dist: DIST_DIR + 'css'                   // SASS文件生成CSS后存放的目录：./dist/css  
+    },  
+    less: {  
+        src: SRC_DIR + 'styles/**/*.less',         // Less目录：./src/styles/  
         dist: DIST_DIR + 'css'                   // SASS文件生成CSS后存放的目录：./dist/css  
     },  
     js: {  

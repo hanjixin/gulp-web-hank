@@ -3,6 +3,7 @@ var autoprefixer = require('gulp-autoprefixer'); // 处理css中浏览器兼容�
 var rename = require('gulp-rename'); //重命名  
 var cssnano = require('gulp-cssnano'); // css的层级压缩合并
 var sass = require('gulp-sass'); //sass
+var less = require('gulp-less'); //sass
 var jshint = require('gulp-jshint'); //js检查 ==> npm install --save-dev jshint gulp-jshint（.jshintrc：https://my.oschina.net/wjj328938669/blog/637433?p=1）  
 var uglify = require('gulp-uglify'); //js压缩  
 var concat = require('gulp-concat'); //合并文件  
@@ -47,6 +48,16 @@ function prod() {
             .pipe(gulp.dest(Config.sass.dist));
     });
     /** 
+     * SASS样式处理 
+     */
+    gulp.task('less', function () {
+        return gulp.src(Config.less.src).pipe(autoprefixer('last 2 version')).pipe(less()).pipe(gulp.dest(Config.less.dist)).pipe(rename({
+                suffix: '.min'
+            })) //rename压缩后的文件名  
+            .pipe(cssnano()) //执行压缩  
+            .pipe(gulp.dest(Config.less.dist));
+    });
+    /** 
      * js处理 
      */
     gulp.task('js', function () {
@@ -74,6 +85,6 @@ function prod() {
             , interlaced: true
         })).pipe(gulp.dest(Config.img.dist));
     });
-    gulp.task('build', ['html', 'css', 'sass', 'js', 'assets', 'images']);
+    gulp.task('build', ['html', 'css', 'sass', 'less', 'js', 'assets', 'images']);
 }
 module.exports = prod;

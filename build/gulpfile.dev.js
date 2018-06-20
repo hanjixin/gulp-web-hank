@@ -3,6 +3,8 @@ var autoprefixer = require('gulp-autoprefixer'); // 处理css中浏览器兼容�
 var rename = require('gulp-rename'); //重命名  
 var cssnano = require('gulp-cssnano'); // css的层级压缩合并
 var sass = require('gulp-sass'); //sass
+var less = require('gulp-less'); //sass
+
 var jshint = require('gulp-jshint'); //js检查 ==> npm install --save-dev jshint gulp-jshint（.jshintrc：https://my.oschina.net/wjj328938669/blog/637433?p=1）  
 var uglify = require('gulp-uglify'); //js压缩  
 var concat = require('gulp-concat'); //合并文件  
@@ -12,6 +14,7 @@ var imagemin = require('gulp-imagemin'); //图片压缩
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
 var Config = require('./gulpfile.config.js');
+var defaultConfig = require('../config/index')
 //======= gulp dev 开发环境下 ===============
 function dev() {
     /** 
@@ -50,6 +53,14 @@ function dev() {
             stream: true
         }));
     });
+     /** 
+     * less样式处理 
+     */
+    gulp.task('less:dev', function () {
+        return gulp.src(Config.less.src).pipe(less()).pipe(gulp.dest(Config.less.dist)).pipe(reload({
+            stream: true
+        }));
+    });
     /** 
      * js处理 
      */
@@ -72,13 +83,13 @@ function dev() {
             stream: true
         }));
     });
-    gulp.task('dev', ['html:dev', 'css:dev', 'sass:dev', 'js:dev', 'assets:dev', 'images:dev'], function () {
+    gulp.task('dev', ['html:dev', 'css:dev', 'sass:dev', 'less:dev', 'js:dev', 'assets:dev', 'images:dev'], function () {
         browserSync.init({
             server: {
-                baseDir: Config.dist,
-                port: 8090
-            }
-            , notify: true
+                baseDir: Config.dist
+            },
+            port: defaultConfig.port, 
+            notify: defaultConfig.notify
         });
         // Watch .html files  
         gulp.watch(Config.html.src, ['html:dev']);
@@ -86,6 +97,8 @@ function dev() {
         gulp.watch(Config.css.src, ['css:dev']);
         // Watch .scss files  
         gulp.watch(Config.sass.src, ['sass:dev']);
+        // Watch .less files  
+        gulp.watch(Config.less.src, ['less:dev']);
         // Watch assets files  
         gulp.watch(Config.assets.src, ['assets:dev']);
         // Watch .js files  
